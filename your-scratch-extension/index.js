@@ -161,7 +161,7 @@ class Scratch3YourExtension {
                         signalVar.value = "Success";
                         // alert("Broadcast Signal updated to: " + signalVar.value);
                     } else {
-                        alert("Ask AI error: Broadcast Signal variable not found.");
+                        alert("Ask AI error: Variable 'AI Signal' not found.");
                     }
                 } else {
                     alert("Ask AI error: Variable 'AI Answer' not found on the stage.");
