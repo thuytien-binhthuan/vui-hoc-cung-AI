@@ -18,7 +18,7 @@ This project is a fork of [dalelane/scratch-extension-development](https://githu
 
 ![image](https://github.com/user-attachments/assets/ec6f9a27-dbf9-4085-8b42-307ce800c026)
 
-It’s been built as part of a competition entry to show initiative and to give Grade 1 students a fun way to practice subjects with the support from AI/LLM for explaination. I have a sample `.sb3` project demonstrates the extension in action:  
+It’s been built as part of a competition entry to show initiative and to give Elementary-level students a fun way to practice subjects with the support from AI/LLM for explaination. I have a sample `.sb3` project demonstrates the extension in action:  
 👉 [Run the demo project](https://thuytien-binhthuan.github.io/vui-hoc-cung-AI/scratch/)
 
 ---
@@ -61,14 +61,14 @@ flowchart LR
 
 ## 💡 Skills 
 This project showcases my ability to:
-- **Game Design**: Creating a multi-level .sb3 Scratch game that guides Grade 1 students through progressively challenging exercises in different subjects math, English, etc.
+- **Game Design**: Creating a multi-level .sb3 Scratch game that guides Elementary students through progressively challenging exercises in different subjects math, English, etc.
 ![image](https://github.com/user-attachments/assets/e74e28d4-dc70-474a-a0f1-3e934fc6bc57)
 
 - **Deploy Azure LLM Endpoint**: Implementing Azure Functions to wrap the LLM API.
 ![image](https://github.com/user-attachments/assets/4dabc548-5bcb-4fbb-bbe9-c75747713bcd)
 
 - **LLM Prompt Design**: Crafting prompts and parsing responses to ensure questions and answers are clear and engaging for elementary students.
-- **UI Integration**: Learning how Scratch’s block rendering works, modifying `index.html`, and ensuring her extension loaded seamlessly in the Scratch UI.
+- **UI Integration**: Learning how Scratch’s block rendering works, modifying `index.html`, and ensuring the extension loaded seamlessly in the Scratch UI.
 - **Event Handling**: Writing JavaScript to listen for block events and pass data between Scratch and the extension runtime.  
 - **Deployment Workflow**: Use automated scripts (defined in the original repo) for build, and publishing to GitHub Pages.
 
@@ -87,7 +87,7 @@ Use this as a launchpad to explore AI in Scratch and collaborate on innovative l
 
 ## 🚀 Live Demo
 
-👉 Try the project and see her `.sb3` in action:  
+👉 Try the project and see `.sb3` in action:  
 **https://thuytien-binhthuan.github.io/vui-hoc-cung-AI/scratch/**
 
 ---
@@ -133,7 +133,7 @@ If you prefer to host your own LLM endpoint using Azure, follow these steps:
    - Read the incoming `question` from the request body.  
    - Construct a child-friendly prompt, e.g.:  
      ```js
-     const prompt = `You are a friendly tutor for Grade 1 students.
+     const prompt = `You are a friendly tutor for Elementary level students.
 
 Student asks: "${question}"
 
