@@ -16,6 +16,8 @@ This project is a fork of [dalelane/scratch-extension-development](https://githu
 - Sends a user-typed question to a GPT-4o-mini LLM API endpoint  
 - Returns the AI’s response back into Scratch for display or further use
 
+![image](https://github.com/user-attachments/assets/ec6f9a27-dbf9-4085-8b42-307ce800c026)
+
 It’s been built as part of a competition entry to show initiative and to give Grade 1 students a fun way to practice subjects with the support from AI/LLM for explaination. I have a sample `.sb3` project demonstrates the extension in action:  
 👉 [Run the demo project](https://thuytien-binhthuan.github.io/vui-hoc-cung-AI/scratch/)
 
@@ -32,7 +34,7 @@ flowchart LR
 
 1. **Scratch 3.0 UI**  
    - User drags the **“Ask AI”** block into their script.  
-2. **Extension Runtime** (`src/extension.js`)  
+2. **Extension Runtime** (`your-scratch-extension/index.js`)  
    - Listens for the block event, captures the question string.  
    - Sends an authenticated `fetch()` request to the LLM API.  
    - Parses the JSON response and resolves it back to Scratch as a string.  
@@ -49,7 +51,7 @@ flowchart LR
   - Scratch’s unofficial extension loader in the offline editor.
 
 - **My Own Work**  
-  - **`src/extension.js`**: customized to call to and LLM endpoint and handle block’s logic.
+  - **`your-scratch-extension/index.js`**: customized to call to and LLM endpoint and handle block’s logic.
   - **Azure Endpoint Setup**: Designing and deploying a custom LLM API endpoint on Azure, including OpenAI resource provisioning and Azure Functions integration.  
   - **`.sb3` Project**: custom Scratch project that uses the “Ask AI” block to quiz topics for elementary-level students(math problems, English, fun facts).  
   - **Live Deployment**: GitHub Pages setup under `/vui-hoc-cung-AI/scratch/` including a friendly UI wrapper (`src/index.html`) for non-technical users.  
@@ -60,12 +62,17 @@ flowchart LR
 ## 💡 Skills 
 This project showcases my ability to:
 - **Game Design**: Creating a multi-level .sb3 Scratch game that guides Grade 1 students through progressively challenging exercises in different subjects math, English, etc.
+![image](https://github.com/user-attachments/assets/e74e28d4-dc70-474a-a0f1-3e934fc6bc57)
+
 - **Deploy Azure LLM Endpoint**: Implementing Azure Functions to wrap the LLM API.
+![image](https://github.com/user-attachments/assets/4dabc548-5bcb-4fbb-bbe9-c75747713bcd)
+
 - **LLM Prompt Design**: Crafting prompts and parsing responses to ensure questions and answers are clear and engaging for elementary students.
 - **UI Integration**: Learning how Scratch’s block rendering works, modifying `index.html`, and ensuring her extension loaded seamlessly in the Scratch UI.
 - **Event Handling**: Writing JavaScript to listen for block events and pass data between Scratch and the extension runtime.  
-- **Asynchronous Programming**: Using `fetch()` and Promises to call the LLM API, and parse JSON responses.  
 - **Deployment Workflow**: Use automated scripts (defined in the original repo) for build, and publishing to GitHub Pages.
+
+
 
 ## 🌐 Extensibility & Collaboration
 This GitHub Pages site and extension template are designed for everyone to build upon:
