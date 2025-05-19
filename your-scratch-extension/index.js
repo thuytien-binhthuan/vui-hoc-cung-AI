@@ -112,11 +112,15 @@ class Scratch3YourExtension {
                 {
                     opcode: 'speechToText',
                     blockType: BlockType.REPORTER,
-                    text: 'speech to text for [SECONDS] seconds',
+                    text: 'speech to text for [SECONDS] seconds with language [LANGUAGE]',
                     arguments: {
                         SECONDS: {
                             type: ArgumentType.NUMBER,
                             defaultValue: 10
+                        },
+                        LANGUAGE: {
+                        type: ArgumentType.STRING,
+                        defaultValue: 'vi'
                         }
                     }
                 }
@@ -219,14 +223,14 @@ class Scratch3YourExtension {
      * Record audio, send to Deepgram, return the transcript.
      * Returns a Promise which Scratch will await.
      */
-    speechToText ({ SECONDS }) {
+    speechToText ({ SECONDS, LANGUAGE }) {
         if (!this._deepgramKey) {
             return Promise.resolve('Error: no Deepgram API key set');
         }
         const durationMs = Math.max(1, Number(SECONDS) || 5) * 1000;
 
         const model = 'nova-2';
-        const language = 'vi';
+        const language = LANGUAGE.trim() || 'vi';
 
         return navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
