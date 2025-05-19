@@ -8,6 +8,7 @@ class Scratch3YourExtension {
         // put any setup for your extension here
         // Save the runtime so it can be used later.
         this.runtime = runtime;
+        this._deepgramKey = '';
     }
 
     /**
@@ -94,6 +95,28 @@ class Scratch3YourExtension {
                         QUESTION: {
                             defaultValue: 'Mặt trời mọc ở hướng nào?',
                             type: ArgumentType.STRING
+                        }
+                    }
+                },
+                {
+                    opcode: 'setSpeechToTextKey',
+                    blockType: BlockType.COMMAND,
+                    text: 'set Deepgram API key to [API_KEY]',
+                    arguments: {
+                        API_KEY: {
+                            type: ArgumentType.STRING,
+                            defaultValue: ''
+                        }
+                    }
+                },
+                {
+                    opcode: 'speechToText',
+                    blockType: BlockType.REPORTER,
+                    text: 'speech to text for [SECONDS] seconds',
+                    arguments: {
+                        SECONDS: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 10
                         }
                     }
                 }
@@ -183,6 +206,73 @@ class Scratch3YourExtension {
                 alert("Ask AI error: 'AI Signal' variable not found.");
             }
           });
+    }
+
+    /**
+     * Store the Deepgram key from the user.
+     */
+    setSpeechToTextKey ({ API_KEY }) {
+        this._deepgramKey = API_KEY.trim();
+    }
+
+    /**
+     * Record audio, send to Deepgram, return the transcript.
+     * Returns a Promise which Scratch will await.
+     */
+    speechToText ({ SECONDS }) {
+        if (!this._deepgramKey) {
+            return Promise.resolve('Error: no Deepgram API key set');
+        }
+        const durationMs = Math.max(1, Number(SECONDS) || 5) * 1000;
+
+        const model = 'nova-2';
+        const language = 'vi';
+
+        return navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                const recorder = new MediaRecorder(stream);
+                const chunks = [];
+                recorder.ondataavailable = e => chunks.push(e.data);
+                recorder.start();
+
+                return new Promise(resolve =>
+                    setTimeout(() => {
+                        recorder.stop();
+                        recorder.onstop = () => {
+                            stream.getTracks().forEach(t => t.stop());
+                            resolve(new Blob(chunks, { type: recorder.mimeType }));
+                        };
+                    }, durationMs)
+                );
+            })
+            .then(blob => {
+                const params = new URLSearchParams({
+                punctuate: 'true',
+                model,
+                language
+                });
+                const url = `https://api.deepgram.com/v1/listen?${params.toString()}`;
+                return fetch(
+                    url,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Token ' + this._deepgramKey,
+                            'Content-Type': blob.type
+                        },
+                        body: blob
+                    }
+                );
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Deepgram error ' + res.status);
+                return res.json();
+            })
+            .then(json => {
+                const alt = json.results.channels[0].alternatives[0];
+                return alt.transcript || '';
+            })
+            .catch(err => 'Error: ' + err.message);
     }
 }
 
