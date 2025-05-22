@@ -116,7 +116,7 @@ class Scratch3YourExtension {
                     arguments: {
                         SECONDS: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: 10
+                            defaultValue: 8
                         },
                         LANGUAGE: {
                         type: ArgumentType.STRING,
