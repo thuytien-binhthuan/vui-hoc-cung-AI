@@ -27,7 +27,7 @@ It’s been built as part of a competition entry to show initiative and to give 
 ```mermaid
 flowchart LR
   A[Scratch 3.0 UI] -->|Ask AI block| B[Extension Runtime : JS]
-  B -->|HTTP POST question| C[LLM API: GPT-4o-mini on Azure]
+  B -->|HTTP POST question| C[LLM API: GPT-4o-mini on Azure; Speech to text: Deepgram]
   C -->|JSON response| B
   B -->|Return text| A
 ```
